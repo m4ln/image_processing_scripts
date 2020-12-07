@@ -11,18 +11,21 @@ import random
 
 if __name__ == '__main__':
     # create dataset with non-neoplastic lung
-    data_dir = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/HE_H.18.4262/H.18.4262_only-H.vmic/512/'
-    allFileNames = glob.glob(data_dir + '/*.tif')
+    # ubuntu
+    # data_dir = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/HE_H.18.4262/H.18.4262_only-H.vmic/512/'
+    # win
+    src_dir = 'Z:/Marlen/datasets/beauty-and-beast/qupath_tiles/H.18.4262_only-H.vmic/size256_overlap64'
+    allFileNames = glob.glob(src_dir + '/*.tif')
     allFileNames = random.sample(allFileNames, len(allFileNames))
 
     #%% Creating Train / Val / Test folders (One time use)
     val_ratio = 0
-    test_ratio = 0.2
+    test_ratio = 0.4
 
 
     #% prepare the directories
     # train folder
-    trainFolder = data_dir +'/train'
+    trainFolder = src_dir + '/train'
     if os.path.exists(trainFolder):
         shutil.rmtree(trainFolder)
     os.makedirs(trainFolder)
@@ -32,14 +35,14 @@ if __name__ == '__main__':
     #    shutil.rmtree(valFolder)
     #os.makedirs(data_dir +'/val')
     # test folder
-    testFolder = data_dir +'/test'
+    testFolder = src_dir + '/test'
     if os.path.exists(testFolder):
         shutil.rmtree(testFolder)
-    os.makedirs(data_dir +'/test')
+    os.makedirs(src_dir + '/test')
 
     #% prepare the data
     # Creating partitions of the data after shuffeling
-    allFileNames = glob.glob(data_dir + '/*.tif')
+    allFileNames = glob.glob(src_dir + '/*.tif')
     np.random.shuffle(allFileNames)
     #train_FileNames, val_FileNames, test_FileNames = np.split(np.array(allFileNames),
     #                                                            [int(len(allFileNames) * (1 - val_ratio + test_ratio)),
@@ -58,13 +61,13 @@ if __name__ == '__main__':
 
     #% Copy-pasting images
     for name in train_FileNames:
-        shutil.copy(name, data_dir + '/train')
+        shutil.copy(name, src_dir + '/train')
 
     #for name in val_FileNames:
     #    shutil.copy(name, data_dir + '/val')
 
     for name in test_FileNames:
-        shutil.copy(name, data_dir + '/test')
+        shutil.copy(name, src_dir + '/test')
 
     #% counter section
     print('Done!')

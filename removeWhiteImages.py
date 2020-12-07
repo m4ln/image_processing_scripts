@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # ubuntu
     # src = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/beauty-and-beast/train_test_sets/test_FID/H.18.4262_only-E.vmic/size512_overlap256/'
     # win
-    src = 'Z:/Marlen/datasets/beauty-and-beast/train_test_sets/test_FID/H.18.4262_only-H.vmic/size512_overlap256'
+    src = 'Z:/Marlen/datasets/beauty-and-beast/qupath_tiles/H.18.4262_only-H.vmic/size256_overlap64'
     allFileNames = glob.glob(src + '/*.tif')
 
     for ifile in allFileNames:
