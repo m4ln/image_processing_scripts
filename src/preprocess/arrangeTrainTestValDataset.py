@@ -10,12 +10,9 @@ import random
 
 
 if __name__ == '__main__':
-    # create dataset with non-neoplastic lung
-    # ubuntu
-    # data_dir = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/HE_H.18.4262/H.18.4262_only-H.vmic/512/'
-    # win
+    #src directory
     src_dir = 'Z:/Marlen/datasets/beauty-and-beast/qupath_tiles/H.18.4262_only-H.vmic/size256_overlap64'
-    allFileNames = glob.glob(src_dir + '/*.tif')
+    allFileNames = glob.glob(src_dir + '/*.png')
     allFileNames = random.sample(allFileNames, len(allFileNames))
 
     #%% Creating Train / Val / Test folders (One time use)

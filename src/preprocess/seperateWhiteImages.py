@@ -8,45 +8,23 @@ import numpy as np
 import glob
 import random
 
-# functions
-def rgb2gray(rgb):
-    rgb = np.array(rgb)
-    r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
-    gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
-
-    return gray
-
-def check4white(gray, tresh_value = 0.5):
-    mask = gray > 220
-    if sum(sum(mask)) > tresh_value * (len(mask) * len(mask)):
-        all_white = True
-    else:
-        all_white = False
-
-    return (all_white)
-
 
 #%% get the sds-path
 if platform == "linux":
-    sds_path = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/HE_H.18.4262/
+    input_dir = '/home/mr38/sds_hd/sd18a006/Marlen/datasets/HE_H.18.4262/
 elif platform == "win32":
-    sds_path = '//lsdf02.urz.uni-heidelberg.de/sd19G003/Marlen/qupath/projects/createTrainingSet/tiles'
+    input_dir = 'Z:/Marlen/project_data/pytorch-cycleGan-stain-normalization/camelyon16classification/trainImages/trainA'
 
 
 #%% create dataset with non-neoplastic lung
-src = sds_path + '/H.18.4262_HE normal.vmic'
-allFileNames = glob.glob(src + '/*.tif')
-allFileNames = random.sample(allFileNames, len(allFileNames))
+allFileNames = glob.glob(input_dir + '/*.png')
+# allFileNames = random.sample(allFileNames, len(allFileNames))
 
 root_dir = sds_path + '/trainingSet'
 lung_folder = root_dir + '/tissue'
 if os.path.exists(lung_folder):
     shutil.rmtree(lung_folder)
 os.makedirs(lung_folder)
-# ws_folder = root_dir + '/whiteSpace'
-# if os.path.exists(ws_folder):
-#     shutil.rmtree(ws_folder)
-# os.makedirs(ws_folder)
 
 # now iterate over the images
 n_lung, n_ws = 1,1
@@ -61,7 +39,7 @@ for ifile in allFileNames:
         print('error override')
         continue
 
-    all_white = check4white(rgb2gray(img), 0.8)
+    all_white = isWhiteImage(rgb2gray(img), 0.8)
 
     if !all_white:
         #if n_lung > n_max_tiles_per_class :
@@ -150,9 +128,9 @@ for cls in classes_dir:
 
     #% prepare the data
     # Creating partitions of the data after shuffeling
-    src = root_dir + cls  # Folder to copy images from
+    input_dir = root_dir + cls  # Folder to copy images from
 
-    allFileNames = glob.glob(src + '/*.tif')
+    allFileNames = glob.glob(input_dir + '/*.tif')
     np.random.shuffle(allFileNames)
     train_FileNames, val_FileNames, test_FileNames = np.split(np.array(allFileNames),
                                                               [int(len(allFileNames) * (1 - val_ratio + test_ratio)),
