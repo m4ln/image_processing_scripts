@@ -1,7 +1,5 @@
 import os
-import glob
 from PIL import Image
-import numpy as np
 from sys import platform
 from util.util import assure_path_exists
 from util.util import isBackgroundImage
