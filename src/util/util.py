@@ -1,140 +1,106 @@
 """This module contains simple helper functions """
-import numpy as np
-from PIL import Image
+from sys import platform
 import os
-import sys
-import pathlib
+import shutil
+import cv2
+import numpy as np
 
-def rgb2gray(pil_image):
-    img_array = np.array(pil_image)
-    r, g, b = img_array[:, :, 0], img_array[:, :, 1], img_array[:, :, 2]
-    gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
+def getSdsPath():
+    """
+    get the sds path based on the operating system
+    :return: sds path if os is win or linux, otherwise error
+    """
+    if platform == "linux":
+        sds_path = '/sds_hd/sd18a006/'
+    elif platform == "win32":
+        sds_path = "//lsdf02.urz.uni-heidelberg.de/sd18A006/"
+    else:
+        print('error: sds path cannot be defined! Abort')
+        return 1
 
-    return gray
+    return sds_path
 
+def ensurePathExists(path, overwrite=True):
+    """
+    creates a new folder and/or clears existing folder
+    :param path: path to the new folder
+    :param overwrite: if True, overwrites content if folder already exists, otherwise keeps it
+    :return:
+    """
+    if os.path.exists(path) and overwrite == True:
+        print('folder cleared')
+        shutil.rmtree(path)
+    if not os.path.exists(path):
+        print('folder created')
+        os.makedirs(path)
 
-def isBackgroundImage(pil_img, tresh_value=0.6):
-    # img_gray = rgb2gray(pil_img)
-    img_gray = np.array(pil_img)
+def rgb2gray(img_rgb):
+    """
+    converts rgb to grayscale image
+    :param img_rgb: rgb image to be converted to grayscale
+    :return: grayscale image
+    """
+    r, g, b = img_rgb[:, :, 0], img_rgb[:, :, 1], img_rgb[:, :, 2]
+    img_gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
 
-    # for color in range(0,250):
-    # mask = (img_gray >= float(color)) * (img_gray < float(color) + 50)
-    # mask_black = img_gray < float(color) + 10
+    return img_gray
 
-    # # white
-    mask = img_gray > 220
-    # # black
-    # mask_black = img_gray < 70
+def isBackgroundImage(img, tresh_value = 0.5, isWhite=True):
+    """
+    checks if an image is  background image containing either all white or all black pixels
+    :param img: input image
+    :param tresh_value: threshold value between 0.0 - 1.0 giving the percentage of bg pixels inside the image
+    :param isWhite: if True, search for white pixels, otherwise black
+    :return: True, if image contains only bg pixels, False otherwise
+    """
 
-    # mask = mask_black + mask_white
+    if (isWhite):
+        # check for white image
+        mask = img > 220
+    else:
+        # check for black image
+        mask = img == 0
 
     if np.count_nonzero(mask) > tresh_value * mask.size:
-        is_background = True
-        # break
+        is_bg = True
     else:
-        is_background = False
+        is_bg = False
 
-    return (is_background)
+    return (is_bg)
 
-
-def isWhiteImage(gray, tresh_value = 0.5):
-    mask = gray > 220
-    if sum(sum(mask)) > tresh_value * (len(mask) * len(mask)):
-        all_white = True
-    else:
-        all_white = False
-
-    return (all_white)
-
-
-def save_image(image_numpy, image_path, aspect_ratio=1.0):
-    """Save a numpy image to the disk
-
-    Parameters:
-        image_numpy (numpy array) -- input numpy array
-        image_path (str)          -- the path of the image
+def printNumpy(x, shp=True, val=True):
+    """
+    Prints the mean, min, max, median, std, and size of a numpy array
+    :param x: numpy array
+    :param shp: if True prints the shape of the numpy array
+    :param val: if True prints the values of the numpy array
+    :return:
     """
 
-    image_pil = Image.fromarray(image_numpy)
-    h, w, _ = image_numpy.shape
-
-    if aspect_ratio > 1.0:
-        image_pil = image_pil.resize((h, int(w * aspect_ratio)), Image.BICUBIC)
-    if aspect_ratio < 1.0:
-        image_pil = image_pil.resize((int(h / aspect_ratio), w), Image.BICUBIC)
-    image_pil.save(image_path)
-
-
-def print_numpy(x, val=True, shp=False):
-    """Print the mean, min, max, median, std, and size of a numpy array
-
-    Parameters:
-        val (bool) -- if print the values of the numpy array
-        shp (bool) -- if print the shape of the numpy array
-    """
     x = x.astype(np.float64)
     if shp:
-        print('shape,', x.shape)
+        print('shape =', x.shape)
     if val:
         x = x.flatten()
         print('mean = %3.3f, min = %3.3f, max = %3.3f, median = %3.3f, std=%3.3f' % (
             np.mean(x), np.min(x), np.max(x), np.median(x), np.std(x)))
 
-
-def mkdirs(paths):
-    """create empty directories if they don't exist
-
-    Parameters:
-        paths (str list) -- a list of directory paths
-    """
-    if isinstance(paths, list) and not isinstance(paths, str):
-        for path in paths:
-            mkdir(path)
-    else:
-        mkdir(paths)
-
-
-def mkdir(path):
-    """create a single empty directory if it didn't exist
-
-    Parameters:
-        path (str) -- a single directory path
-    """
-    if not os.path.exists(path):
-        os.makedirs(path)
-
-
-# retrieve correct path depending on os and sds
-def check_os(sds=False):
-    path = ''
-    if sys.platform == "linux":
-        if sds:
-            path = '/sds_hd/sd18a006/'
-        path1 = '/home/marlen/'
-        path2 = '/home/mr38/'
-        if pathlib.Path('/home/marlen/').exists():
-            return path1 + path
-        elif pathlib.Path('/home/mr38/').exists():
-            return path2 + path
-        else:
-            print('error: sds path cannot be defined! Abort')
-            return 1
-    elif sys.platform == "win32":
-        path = ''
-        if sds:
-            path = '//lsdf02.urz.uni-heidelberg.de/sd18A006/'
-        else:
-            path = 'C:/Users/mr38/'
-        if pathlib.Path(path).exists():
-            return path
-        else:
-            print('error: sds path cannot be defined! Abort')
-            return 1
-    else:
-        print('error: sds path cannot be defined! Abort')
-        return 1
-
-def assure_path_exists(path):
-    dir = os.path.dirname(path)
-    if not os.path.exists(dir):
-        os.makedirs(dir)
+if __name__ == '__main__':
+    test_path = '../../test/'
+    # 1
+    print(getSdsPath())
+    # 2
+    ensurePathExists(test_path + 'ensure_path/', True)
+    # 3
+    img_rgb = cv2.imread('../../data/mix#1.png')
+    cv2.imwrite(test_path + 'img_rgb.png', img_rgb)
+    img_gray = rgb2gray(img_rgb)
+    cv2.imwrite(test_path + 'img_gray.png', img_gray)
+    # 4
+    img_white = cv2.imread('../../data/white#1.png')
+    img_black = cv2.imread('../../data/black#1.png')
+    print(isBackgroundImage(img_white))
+    print(isBackgroundImage(img_black))
+    print(isBackgroundImage(img_black, isWhite=False))
+    # 6
+    printNumpy(img_rgb)
