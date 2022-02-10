@@ -11,7 +11,7 @@ output_dir = input_dir + "_tiles_" + W + "_" + X
 assure_path_exists(output_dir)
 
 for filename in os.listdir(input_dir):
-    image = Image.open(os.path.join(input_dir, filename))
+    image = Image.open(os.src_path.join(input_dir, filename))
     if image.size[0] % tile_width == 0 and image.size[1] % tile_height ==0 :
         currentx = 0
         currenty = 0

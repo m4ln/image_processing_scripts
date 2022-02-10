@@ -2,11 +2,6 @@
 from PIL import Image
 import os
 
-def assure_path_exists(path):
-    dir = os.path.dirname(path)
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-
 dim = 256
 W = [dim]
 H = W
