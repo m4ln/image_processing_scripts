@@ -1,10 +1,14 @@
 import matplotlib.pyplot as plt
 import cv2
-import os
 import numpy as np
-from util.ensure_path_exists import ensurePathExists
 
 def createHistogram(img_path, target_path=''):
+    """
+    creates a histogram of a given image and either shows or saves a plot
+    :param img_path: path to the image
+    :param target_path: if given, saves a plot, otherwise (if empty) shows the plot
+    :return: histogram plot
+    """
     img = cv2.imread(img_path)
 
     depth = img.shape[2]
@@ -42,6 +46,8 @@ def createHistogram(img_path, target_path=''):
         plt.savefig(target_path + 'histo')
 
     plt.clf()
+
+    return plt
 
 if __name__ == '__main__':
     from scripts.config import src_pth, trgt_pth
