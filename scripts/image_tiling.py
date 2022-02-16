@@ -1,5 +1,8 @@
 from PIL import Image
 import sys
+import os
+from util.ensure_path_exists import ensurePathExists
+
 
 tile_width = int(sys.argv[2])
 tile_height = tile_width    
@@ -7,8 +10,8 @@ tile_height = tile_width
 set_name = "A03"
 magnification = "X40"
 input_dir = "/home/mr38/sds_hd/sd18a006/Marlen/datasets/MITOS-ATYPIA-14/extract/train/" + set_name + "/frames/" + magnification + "/"
-output_dir = input_dir + "_tiles_" + W + "_" + X
-assure_path_exists(output_dir)
+output_dir = input_dir + "_tiles_"
+ensurePathExists(output_dir)
 
 for filename in os.listdir(input_dir):
     image = Image.open(os.src_path.join(input_dir, filename))
