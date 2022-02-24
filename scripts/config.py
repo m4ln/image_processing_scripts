@@ -1,13 +1,13 @@
 
 # import
-from util.get_sds_path import getSdsPath
+from util.get_sds_path import get_sds_path
 
 ## paths
 # ----------
 # relative path (or absolute)
 useSds = True
 # if data is saved on sds then get path depending on os, otherwise change the paths below to match your needs
-sds_pth = getSdsPath()
+sds_pth = get_sds_path()
 # folder where the images are stored
 src_pth = sds_pth + '/marlen/scripts/python_image_processing/data/'
 # folder where the labels are stored

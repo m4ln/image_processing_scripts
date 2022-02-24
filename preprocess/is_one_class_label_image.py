@@ -1,13 +1,16 @@
 
 import cv2
 import numpy as np
-import os
 
-def isOneClassLabelImage(label_path):
+def is_one_class_label_image(label_path):
     """
     print if a label image containins only one class
-    :param label_path: path to the label image
-    :return: True, if the image contains one class, False otherwise
+
+    Args:
+        label_path: path to the label image
+
+    Returns:
+        True, if the image contains one class, False otherwise
     """
 
     label = cv2.imread(label_path)
@@ -30,4 +33,4 @@ if __name__ == '__main__':
 
     for label_file in label_files:
         # print labels containing one class
-        print(isOneClassLabelImage(label_file))
+        print(is_one_class_label_image(label_file))

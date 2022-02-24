@@ -2,13 +2,18 @@
 import os
 import shutil
 
-def ensurePathExists(path, overwrite=True):
+def ensure_path_exists(path, overwrite=True):
     """
     creates a new folder and/or clears existing folder
-    :param path: path to the new folder
-    :param overwrite: if True, overwrites content if folder already exists, otherwise keeps it
-    :return:
+
+    Args:
+        path: path to the new folder
+        overwrite: if True, overwrites content if folder already exists, otherwise keeps it
+
+    Returns:
+
     """
+
     if os.path.exists(path) and overwrite == True:
         print('folder cleared')
         shutil.rmtree(path)

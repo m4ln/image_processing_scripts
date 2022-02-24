@@ -1,5 +1,7 @@
 # Image Processing
-my collection of some scripts for image processing
+my collection of some scripts for image processing (mostly python).
+
+Using [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html).
 
 ## Getting Started
 

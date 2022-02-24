@@ -1,9 +1,9 @@
 import os
 import shutil
 import glob
-from util.get_sds_path import getSdsPath
-from util.ensure_path_exists import ensurePathExists
-from preprocess.is_background_image import isBackgroundImage
+from util.get_sds_path import get_sds_path
+from util.ensure_path_exists import ensure_path_exists
+from preprocess.is_background_image import is_background_image
 
 #############################################
 # set variables
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     # set paths
     if useSds:
-        sds_pth = getSdsPath()
+        sds_pth = get_sds_path()
     else:
         sds_pth = ''
 
@@ -38,13 +38,13 @@ if __name__ == '__main__':
     if not trgt_pth == '':
         # paths to move images if not being deleted
         save_dir = trgt_pth + '/background/'
-        ensurePathExists(save_dir)
+        ensure_path_exists(save_dir)
 
     # iterate through all files
     img_files = glob.glob(src_pth + '/*' + img_type)
 
     for img_file in img_files:
-        if isBackgroundImage(img_file, thresh_val, isWhite):
+        if is_background_image(img_file, thresh_val, isWhite):
             print('background image detected: ' + img_file)
             if trgt_pth == '':
                 os.remove(img_file)

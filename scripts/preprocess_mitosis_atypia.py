@@ -1,19 +1,8 @@
 import cv2
 import math
 import os
-
-
-def assure_path_exists(path):
-    dir = os.path.dirname(path)
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-
-
-def resize_image(img, x, y):
-    dsize = (x, y)
-    img_resized = cv2.resize(img, dsize)
-    return img_resized
-
+from util.ensure_path_exists import ensure_path_exists
+from preprocess.resize_image import resize_image
 
 if __name__ == '__main__':
     # width and height for image resizing
@@ -29,7 +18,7 @@ if __name__ == '__main__':
     # path to output
     output_dir = input_dir + "_tiles_" + str(256) + "_offset_" + str(offs) + "/"
     print(output_dir)
-    assure_path_exists(output_dir)
+    ensure_path_exists(output_dir)
 
     # go through each image in directory
     for filename in os.listdir(input_dir):
