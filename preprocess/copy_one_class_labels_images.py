@@ -37,10 +37,10 @@ def copy_one_class_images_labels(path_to_images, path_to_labels, target_path, im
 
 
 if __name__ == '__main__':
-    from scripts.config import src_pth, trgt_pth
+    from scripts.config import source_path, target_path
 
     # iterate through all files
-    img_files = src_pth + '/one_class_images/images/'
-    label_files = src_pth + '/one_class_images/labels/'
+    img_files = source_path + '/one_class_images/images/'
+    label_files = source_path + '/one_class_images/labels/'
 
-    copy_one_class_images_labels(img_files, label_files, trgt_pth, label_suffix='')
+    copy_one_class_images_labels(img_files, label_files, target_path, label_suffix='')

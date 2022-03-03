@@ -20,6 +20,6 @@ def is_corrupted_image(path_to_image):
         return True
 
 if __name__ == '__main__':
-    from scripts.config import src_pth
+    from scripts.config import source_path
 
-    print(is_corrupted_image(src_pth + '/white#1.png'))
+    print(is_corrupted_image(source_path + '/white#1.png'))

@@ -20,7 +20,7 @@ def rgb2gray(path_to_image):
 
 
 if __name__ == '__main__':
-    from scripts.config import src_pth, trgt_pth
+    from scripts.config import source_path, target_path
 
-    img_gray = rgb2gray(src_pth + '/mix#1.png')
-    cv2.imwrite(trgt_pth + '/img_gray.png', img_gray)
+    img_gray = rgb2gray(source_path + '/mix#1.png')
+    cv2.imwrite(target_path + '/img_gray.png', img_gray)

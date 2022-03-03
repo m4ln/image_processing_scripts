@@ -25,11 +25,11 @@ def is_one_class_label_image(label_path):
             return False
 
 if __name__ == '__main__':
-    from scripts.config import src_pth
+    from scripts.config import source_path
     import glob
 
     # iterate through all files
-    label_files = glob.glob(src_pth + '/one_class_images/labels/*.png')
+    label_files = glob.glob(source_path + '/one_class_images/labels/*.png')
 
     for label_file in label_files:
         # print labels containing one class

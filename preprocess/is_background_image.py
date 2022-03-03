@@ -34,9 +34,9 @@ def is_background_image(path_to_image, thresh_value=THRESH_VAL, is_white=True):
 
 
 if __name__ == '__main__':
-    from scripts.config import src_pth
+    from scripts.config import source_path
 
-    print(is_background_image(src_pth + '/white#1.png'))
-    print(is_background_image(src_pth + '/black#1.png'))
-    print(is_background_image(src_pth + '/black#1.png', is_white=False))
+    print(is_background_image(source_path + '/white#1.png'))
+    print(is_background_image(source_path + '/black#1.png'))
+    print(is_background_image(source_path + '/black#1.png', is_white=False))
 
