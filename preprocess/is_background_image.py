@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+from scripts import config
+
 THRESH_VAL = 0.7
 
 
@@ -33,9 +35,12 @@ def is_background_image(path_to_image, thresh_value=THRESH_VAL, is_white=True):
         return False
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path
+def main():
+    print(is_background_image(config.source_path + '/white#1.png'))
+    print(is_background_image(config.source_path + '/black#1.png'))
+    print(is_background_image(config.source_path + '/black#1.png',
+                              is_white=False))
 
-    print(is_background_image(source_path + '/white#1.png'))
-    print(is_background_image(source_path + '/black#1.png'))
-    print(is_background_image(source_path + '/black#1.png', is_white=False))
+
+if __name__ == '__main__':
+    main()

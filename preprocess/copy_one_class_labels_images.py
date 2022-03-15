@@ -3,6 +3,7 @@ import os
 import shutil
 
 from preprocess.is_one_class_label_image import is_one_class_label_image
+from scripts import config
 from util.ensure_path_exists import ensure_path_exists
 
 
@@ -38,12 +39,14 @@ def copy_one_class_images_labels(path_to_images, path_to_labels, target_path,
             shutil.copy(label_file, one_class_label_dir)
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path, target_path
-
+def main():
     # iterate through all files
-    img_files = source_path + '/one_class_images/images/'
-    label_files = source_path + '/one_class_images/labels/'
+    img_files = config.source_path + '/one_class_images/images/'
+    label_files = config.source_path + '/one_class_images/labels/'
 
-    copy_one_class_images_labels(img_files, label_files, target_path,
+    copy_one_class_images_labels(img_files, label_files, config.target_path,
                                  label_suffix='')
+
+
+if __name__ == '__main__':
+    main()

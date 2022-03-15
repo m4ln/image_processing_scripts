@@ -1,5 +1,9 @@
+import glob
+
 import cv2
 import numpy as np
+
+from scripts import config
 
 
 def is_one_class_label_image(label_path):
@@ -21,19 +25,21 @@ def is_one_class_label_image(label_path):
     else:
         if len(np.unique(label[:, :, 0])) == 1 and len(
                 np.unique(label[:, :, 1])) == 1 and len(
-                np.unique(label[:, :, 2])) == 1:
+            np.unique(label[:, :, 2])) == 1:
             return True
         else:
             return False
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path
-    import glob
-
+def main():
     # iterate through all files
-    label_files = glob.glob(source_path + '/one_class_images/labels/*.png')
+    label_files = glob.glob(
+        config.source_path + '/one_class_images/labels/*.png')
 
     for label_file in label_files:
         # print labels containing one class
         print(is_one_class_label_image(label_file))
+
+
+if __name__ == '__main__':
+    main()

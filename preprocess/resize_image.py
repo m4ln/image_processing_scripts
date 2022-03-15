@@ -1,5 +1,7 @@
 import cv2
 
+from scripts import config
+
 
 def resize_image(path_to_image, new_width, new_height):
     """
@@ -20,8 +22,10 @@ def resize_image(path_to_image, new_width, new_height):
     return img_resized
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path, target_path
+def main():
+    img_resized = resize_image(config.source_path + '/mix#1.png', 64, 64)
+    cv2.imwrite(config.target_path + '/img_resized.png', img_resized)
 
-    img_resized = resize_image(source_path + '/mix#1.png', 64, 64)
-    cv2.imwrite(target_path + '/img_resized.png', img_resized)
+
+if __name__ == '__main__':
+    main()

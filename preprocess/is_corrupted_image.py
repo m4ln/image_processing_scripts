@@ -1,5 +1,7 @@
 from PIL import Image
 
+from scripts import config
+
 
 def is_corrupted_image(path_to_image):
     """
@@ -20,7 +22,9 @@ def is_corrupted_image(path_to_image):
         return True
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path
+def main():
+    print(is_corrupted_image(config.source_path + '/white#1.png'))
 
-    print(is_corrupted_image(source_path + '/white#1.png'))
+
+if __name__ == '__main__':
+    main()

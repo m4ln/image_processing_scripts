@@ -1,5 +1,7 @@
 import cv2
 
+from scripts import config
+
 
 def rgb2gray(path_to_image):
     """
@@ -19,8 +21,10 @@ def rgb2gray(path_to_image):
     return img_gray
 
 
-if __name__ == '__main__':
-    from scripts.config import source_path, target_path
+def main():
+    img_gray = rgb2gray(config.source_path + '/mix#1.png')
+    cv2.imwrite(config.target_path + '/img_gray.png', img_gray)
 
-    img_gray = rgb2gray(source_path + '/mix#1.png')
-    cv2.imwrite(target_path + '/img_gray.png', img_gray)
+
+if __name__ == '__main__':
+    main()
