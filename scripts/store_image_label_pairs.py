@@ -2,11 +2,11 @@
 To use this script change the variables starting from line 12
 """
 
-import shutil
 import glob
-from util.ensure_path_exists import ensure_path_exists
 import os
+import shutil
 
+from util.ensure_path_exists import ensure_path_exists
 
 # SET VARIABLES
 image_path = 'C:/Users/mr38/projects/masterproject_valentin_barth/data/classes_12/Input/train/'
@@ -17,7 +17,6 @@ target_path_labels = 'C:/Users/mr38/projects/masterproject_valentin_barth/data/c
 label_suffix = '-labelsIDX2classes'
 number_of_files_to_copy = 200
 
-
 if __name__ == '__main__':
 
     # create target paths if none exist or overwrite them
@@ -26,7 +25,7 @@ if __name__ == '__main__':
 
     # iterate through all files
     img_files = glob.glob(image_path + '/*' + image_type)
-    if(number_of_files_to_copy < len(img_files)):
+    if (number_of_files_to_copy < len(img_files)):
         img_files = img_files[:number_of_files_to_copy]
 
     for img_file in img_files:

@@ -1,33 +1,38 @@
-from PIL import Image
-import sys
 import os
+import sys
+
+from PIL import Image
+
 from util.ensure_path_exists import ensure_path_exists
 
-
 tile_width = int(sys.argv[2])
-tile_height = tile_width    
+tile_height = tile_width
 
 set_name = "A03"
 magnification = "X40"
-input_dir = "/home/mr38/sds_hd/sd18a006/Marlen/datasets/MITOS-ATYPIA-14/extract/train/" + set_name + "/frames/" + magnification + "/"
+input_dir = "/home/mr38/sds_hd/sd18a006/Marlen/datasets/MITOS-ATYPIA-14" \
+            "/extract/train/" + set_name + "/frames/" + magnification + "/ "
 output_dir = input_dir + "_tiles_"
 ensure_path_exists(output_dir)
 
 for filename in os.listdir(input_dir):
     image = Image.open(os.src_path.join(input_dir, filename))
-    if image.size[0] % tile_width == 0 and image.size[1] % tile_height ==0 :
+    if image.size[0] % tile_width == 0 and image.size[1] % tile_height == 0:
         currentx = 0
         currenty = 0
         while currenty < image.size[1]:
             while currentx < image.size[0]:
                 print(currentx, ",", currenty)
-                tile = image.crop((currentx,currenty,currentx + tile_width,currenty + tile_height))
-                tile.save("x" + str(currentx) + "y" + str(currenty) + ".png","PNG")
+                tile = image.crop((currentx, currenty, currentx + tile_width,
+                                   currenty + tile_height))
+                tile.save("x" + str(currentx) + "y" + str(currenty) + ".png",
+                          "PNG")
                 currentx += tile_width
             currenty += tile_height
             currentx = 0
     else:
-        print("sorry your image does not fit neatly into", tile_width, "*", tile_height, "tiles")
+        print("sorry your image does not fit neatly into", tile_width, "*",
+              tile_height, "tiles")
 
 # # input = "/home/mr38/sds_hd/sd18a006/Marlen/python/lena_gray.png"
 # # img = Image.open(input)

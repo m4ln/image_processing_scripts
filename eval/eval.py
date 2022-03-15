@@ -1,12 +1,8 @@
-
 # TODO test these function
 
-import numpy as np
-from pathlib import Path
-import os, errno, sys
-from matplotlib import pyplot as plt
 import cv2
-
+import numpy as np
+from matplotlib import pyplot as plt
 # from sklearn.feature_extraction import image
 # import matplotlib.image as matlabimg
 # from scipy.misc import imread
@@ -70,8 +66,9 @@ def create_histogram(path_to_image, target_path=''):
 
 def calculate_mse(path_to_image_1, path_to_image_2):
     """
-    computes the 'Mean Squared Error' (MSE) between two images as the sum of the squared difference between them
-    NOTE: the two images must have the same dimension
+    computes the 'Mean Squared Error' (MSE) between two images as the sum of
+    the squared difference between them NOTE: the two images must have the
+    same dimension
 
     Args:
         path_to_image_1: path to the first image
@@ -80,7 +77,6 @@ def calculate_mse(path_to_image_1, path_to_image_2):
     Returns:
         the MSE, the lower the error, the more "similar" the two images are
     """
-
 
     image_1 = cv2.imread(path_to_image_1)
     image_2 = cv2.imread(path_to_image_2)
@@ -106,7 +102,8 @@ def calculate_ssim(path_to_image_1, path_to_image_2):
     image_1 = cv2.imread(path_to_image_1)
     image_2 = cv2.imread(path_to_image_2)
 
-    ssim = structural_similarity(image_1, image_2, gradient=False, channel_axis=2)
+    ssim = structural_similarity(image_1, image_2, gradient=False,
+                                 channel_axis=2)
 
     return ssim
 

@@ -1,5 +1,5 @@
-
 import cv2
+
 
 def resize_image(path_to_image, new_width, new_height):
     """
@@ -18,6 +18,7 @@ def resize_image(path_to_image, new_width, new_height):
     img_resized = cv2.resize(img_resized, dsize=(new_width, new_height))
 
     return img_resized
+
 
 if __name__ == '__main__':
     from scripts.config import source_path, target_path

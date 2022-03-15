@@ -1,5 +1,5 @@
-
 from sys import platform
+
 
 def get_sds_path():
     """

@@ -1,9 +1,10 @@
+import glob
 import os
 import shutil
-import glob
-from util.get_sds_path import get_sds_path
-from util.ensure_path_exists import ensure_path_exists
+
 from preprocess.is_background_image import is_background_image
+from util.ensure_path_exists import ensure_path_exists
+from util.get_sds_path import get_sds_path
 
 #############################################
 # set variables
@@ -50,6 +51,3 @@ if __name__ == '__main__':
                 os.remove(img_file)
             else:
                 shutil.move(img_file, save_dir)
-
-
-

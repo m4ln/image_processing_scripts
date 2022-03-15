@@ -1,12 +1,12 @@
-
 # import
 from util.get_sds_path import get_sds_path
 
-## paths
+# paths
 # ----------
 # relative path (or absolute)
 use_sds = True
-# if data is saved on sds then get path depending on os, otherwise change the paths below to match your needs
+# if data is saved on sds then get path depending on os, otherwise change the
+# paths below to match your needs
 sds_path = get_sds_path()
 # folder where the images are stored
 source_path = sds_path + '/marlen/scripts/python_image_processing/data/'
@@ -20,7 +20,7 @@ label_suffix = '-labelsIDX2classes'
 # path to store the files after sorting
 target_path = sds_path + '/marlen/scripts/python_image_processing/test/'
 
-## images
+# images
 # ----------
 # type of image format (e.g .png, .jpg)
 image_type = '.png'
@@ -33,9 +33,6 @@ thresh_value = 0.5
 # background pixels are white (or black otherwise)
 is_white = True
 
-
-## training details
-# ----------
-# split of train and val images in percent (e.g. 1.0: 100% train, 0% val; 0.1: 10% train, 90% val)
+# training details ---------- split of train and val images in percent (e.g.
+# 1.0: 100% train, 0% val; 0.1: 10% train, 90% val)
 train_split = 1.0
-

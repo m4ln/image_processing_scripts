@@ -1,11 +1,13 @@
-
-import shutil
 import glob
+import os
+import shutil
+
 from preprocess.is_one_class_label_image import is_one_class_label_image
 from util.ensure_path_exists import ensure_path_exists
-import os
 
-def copy_one_class_images_labels(path_to_images, path_to_labels, target_path, image_type='.png', label_suffix='-labels'):
+
+def copy_one_class_images_labels(path_to_images, path_to_labels, target_path,
+                                 image_type='.png', label_suffix='-labels'):
     """
         copy images which contain only one class label
     Args:
@@ -22,8 +24,8 @@ def copy_one_class_images_labels(path_to_images, path_to_labels, target_path, im
     img_files = glob.glob(path_to_images + '/*' + image_type)
 
     target_path += '/one_class_images_labels/'
-    one_class_img_dir =  target_path + '/images/'
-    one_class_label_dir =  target_path + '/labels/'
+    one_class_img_dir = target_path + '/images/'
+    one_class_label_dir = target_path + '/labels/'
 
     ensure_path_exists(one_class_img_dir)
     ensure_path_exists(one_class_label_dir)
@@ -43,4 +45,5 @@ if __name__ == '__main__':
     img_files = source_path + '/one_class_images/images/'
     label_files = source_path + '/one_class_images/labels/'
 
-    copy_one_class_images_labels(img_files, label_files, target_path, label_suffix='')
+    copy_one_class_images_labels(img_files, label_files, target_path,
+                                 label_suffix='')

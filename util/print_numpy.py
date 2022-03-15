@@ -1,4 +1,3 @@
-
 import numpy as np
 
 
@@ -21,5 +20,7 @@ def print_numpy(array, shape=True, val=True):
         print('shape =', array.shape)
     if val:
         array = array.flatten()
-        print('mean = %3.3f, min = %3.3f, max = %3.3f, median = %3.3f, std=%3.3f' % (
-            np.mean(array), np.min(array), np.max(array), np.median(array), np.std(array)))
+        print(
+            'mean = %3.3f, min = %3.3f, max = %3.3f, median = %3.3f, std=%3.3f' % (
+                np.mean(array), np.min(array), np.max(array), np.median(array),
+                np.std(array)))

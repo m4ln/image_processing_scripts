@@ -1,8 +1,8 @@
-
 import cv2
 import numpy as np
 
 THRESH_VAL = 0.7
+
 
 def is_background_image(path_to_image, thresh_value=THRESH_VAL, is_white=True):
     """
@@ -39,4 +39,3 @@ if __name__ == '__main__':
     print(is_background_image(source_path + '/white#1.png'))
     print(is_background_image(source_path + '/black#1.png'))
     print(is_background_image(source_path + '/black#1.png', is_white=False))
-

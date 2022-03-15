@@ -1,5 +1,5 @@
-
 from PIL import Image
+
 
 def is_corrupted_image(path_to_image):
     """
@@ -18,6 +18,7 @@ def is_corrupted_image(path_to_image):
         return False
     except (IOError, SyntaxError):
         return True
+
 
 if __name__ == '__main__':
     from scripts.config import source_path

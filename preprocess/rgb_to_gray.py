@@ -1,5 +1,5 @@
-
 import cv2
+
 
 def rgb2gray(path_to_image):
     """
