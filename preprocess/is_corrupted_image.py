@@ -1,6 +1,6 @@
 from PIL import Image
 
-from scripts import config
+import config
 
 
 def is_corrupted_image(path_to_image):

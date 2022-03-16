@@ -1,6 +1,6 @@
 import cv2
 
-from scripts import config
+import config
 
 
 def rgb2gray(path_to_image):

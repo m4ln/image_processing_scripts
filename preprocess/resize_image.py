@@ -1,6 +1,6 @@
 import cv2
 
-from scripts import config
+import config
 
 
 def resize_image(path_to_image, new_width, new_height):

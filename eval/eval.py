@@ -109,7 +109,7 @@ def calculate_ssim(path_to_image_1, path_to_image_2):
 
 
 if __name__ == "__main__":
-    from scripts.config import source_path, target_path
+    from config import source_path, target_path
 
     path_to_image_1 = source_path + '/mix#1.png'
     path_to_image_2 = source_path + '/mix#2.png'

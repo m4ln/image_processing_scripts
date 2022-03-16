@@ -3,7 +3,7 @@ import glob
 import cv2
 import numpy as np
 
-from scripts import config
+import config
 
 
 def is_one_class_label_image(label_path):
@@ -25,7 +25,7 @@ def is_one_class_label_image(label_path):
     else:
         if len(np.unique(label[:, :, 0])) == 1 and len(
                 np.unique(label[:, :, 1])) == 1 and len(
-            np.unique(label[:, :, 2])) == 1:
+                np.unique(label[:, :, 2])) == 1:
             return True
         else:
             return False

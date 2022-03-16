@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from scripts import config
+import config
 
 THRESH_VAL = 0.7
 

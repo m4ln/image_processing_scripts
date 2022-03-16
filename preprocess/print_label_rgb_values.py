@@ -3,7 +3,7 @@ import os
 import shutil
 
 from preprocess.is_one_class_label_image import is_one_class_label_image
-import config
+from scripts import config
 from util.ensure_path_exists import ensure_path_exists
 
 
