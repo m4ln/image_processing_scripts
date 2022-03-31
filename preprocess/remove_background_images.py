@@ -2,30 +2,65 @@ import glob
 import os
 import shutil
 
-from preprocess.is_background_image import is_background_image
+import cv2
+import numpy as np
+
 from util.ensure_path_exists import ensure_path_exists
 from util.get_sds_path import get_sds_path
 
-#############################################
-# set variables
-
-# use sds if available
-useSds = True
-# folder where the images are stored
-src_pth = '/marlen/scripts/python_image_processing/data'
-# if images should be deleted leave empty
-trgt_pth = '/marlen/scripts/python_image_processing/test'
-# type of image format (e.g .png, .jpg)
-img_type = '.png'
-# thresh value for removing background images
-thresh_val = 0.5
-# background pixels are white (or black otherwise)
-isWhite = True
-
-#############################################
+THRESH_VAL = 0.7
 
 
-if __name__ == '__main__':
+def is_background_image(path_to_image, thresh_value=THRESH_VAL, is_white=True):
+    """
+    checks if an image is  background image containing either all white or all
+    black pixels
+
+    Args:
+        path_to_image: path to input image
+        thresh_value:
+            threshold value between 0.0 - 1.0 giving the percentage of bg pixels
+            inside the image
+        is_white: if True, search for white pixels, otherwise black
+
+    Returns:
+        True, if image contains only bg pixels, False otherwise
+
+    """
+
+    img = cv2.imread(path_to_image)
+
+    if (is_white):
+        # check for white image
+        mask = img > 220
+    else:
+        # check for black image
+        mask = img == 0
+
+    if np.count_nonzero(mask) > thresh_value * mask.size:
+        return True
+    else:
+        return False
+
+
+def main():
+    #############################################
+    # set variables
+
+    # use sds if available
+    useSds = True
+    # folder where the images are stored
+    src_pth = '/marlen/scripts/python_image_processing/data'
+    # if images should be deleted leave empty
+    trgt_pth = '/marlen/scripts/python_image_processing/test'
+    # type of image format (e.g .png, .jpg)
+    img_type = '.png'
+    # thresh value for removing background images
+    thresh_val = 0.5
+    # background pixels are white (or black otherwise)
+    isWhite = True
+
+    #############################################
 
     # set paths
     if useSds:
@@ -51,3 +86,7 @@ if __name__ == '__main__':
                 os.remove(img_file)
             else:
                 shutil.move(img_file, save_dir)
+
+
+if __name__ == '__main__':
+    main()
