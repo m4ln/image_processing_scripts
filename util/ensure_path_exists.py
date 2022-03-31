@@ -14,7 +14,7 @@ def ensure_path_exists(path, overwrite=True):
 
     """
 
-    if os.path.exists(path) and overwrite == True:
+    if os.path.exists(path) and overwrite:
         print('folder cleared')
         shutil.rmtree(path)
     if not os.path.exists(path):
