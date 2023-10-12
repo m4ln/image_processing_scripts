@@ -1,6 +1,6 @@
 from PIL import Image
 
-import config
+#import config
 
 
 def is_corrupted_image(path_to_image):
@@ -22,9 +22,28 @@ def is_corrupted_image(path_to_image):
         return True
 
 
-def main():
-    print(is_corrupted_image(config.source_path + '/white#1.png'))
+def main(path_to_images):
+    """
+    checks if all images in a folder are corrupted/not readable and deletes them
+
+    Args:
+        path_to_images: path to the folder containing the images
+
+    Returns:
+        None
+    """
+
+    import os
+    import glob
+
+    print('number of images: ' + str(len(os.listdir(path_to_images))))
+
+    for filename in glob.glob(os.path.join(path_to_images, '*.png')):
+        if is_corrupted_image(filename):
+            print('corrupted image: ' + filename)
+            os.remove(filename)
 
 
 if __name__ == '__main__':
-    main()
+    path_to_images = '/home/mr38/sds_hd/sd18a006/marlen/histoNorm/urothel/data/trainB/'
+    main(path_to_images)
