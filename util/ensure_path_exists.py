@@ -7,11 +7,11 @@ def ensure_path_exists(path, overwrite=True):
     creates a new folder and/or clears existing folder
 
     Args:
-        path: path to the new folder overwrite: if True, overwrites content
-        if folder already exists, otherwise keeps it
+        path: path to the new folder
+        overwrite: if True, overwrites content if folder already exists
 
     Returns:
-
+        None
     """
 
     if os.path.exists(path) and overwrite:
