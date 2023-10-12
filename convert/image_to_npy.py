@@ -39,7 +39,6 @@ def save_images_to_npy(path_to_images, image_type='.png'):
     Args:
         path_to_images: path to the images
         path_to_labels: path to the labels
-        target_path: path to store the images/labels
         image_type: type of the images/labels (e.g. .jpg, .png)
         label_suffix: the suffix of the label names
 
@@ -49,10 +48,6 @@ def save_images_to_npy(path_to_images, image_type='.png'):
 
     # iterate through all files
     img_files = glob.glob(path_to_images + '/*' + image_type)
-
-    target_path = path_to_images + '/npy'
-
-    ensure_path_exists(target_path)
 
     for image_file in img_files:
         image_npy = image_to_npy(image_file)
